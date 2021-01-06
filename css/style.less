@@ -1,0 +1,160 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.top-bar {
+    height: 48px;
+    background-color: black;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .user-info {
+        i {
+            color: white;
+        }
+    }
+
+    .logo {
+        margin-top: 6px;
+    }
+}
+
+.left-menu {
+    // 显示隐藏的下拉菜单
+    &:active{
+        .nav {
+            display: block;
+        }
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000;
+        padding-top: 60px;
+
+        li {
+            width: 80%;
+            margin: 0 auto;
+            border-bottom: 1px solid #4e4e4e;
+
+            a {
+                display: block;
+                color: white;
+                font-size: 14px;
+                line-height: 44px;
+
+                &:hover {
+                    color: rgb(218, 214, 214);
+                }
+            }
+
+            &:last-child a {
+                display: inline-block;
+                margin-right: 5px;
+            }
+
+            span {
+                color: white;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .menu-icon {
+        width: 18px;
+        height: 48px;
+        position: relative;
+
+        li {
+            width: 18px;
+            height: 1px;
+            background-color: white;
+            position: absolute;
+
+            // 修改变形的原点
+            transform-origin: left center;
+            transition: 0.4s;
+        }
+
+        li:nth-child(1) {
+            top: 18px;
+        }
+
+        li:nth-child(2) {
+            top: 23px;
+        }
+
+        li:nth-child(3) {
+            bottom: 18px;
+        }
+
+        &:active {
+            li:nth-child(1) {
+                // 向下旋转
+                transform: rotateZ(38deg);
+            }
+
+            li:nth-child(2) {
+                // 隐藏
+                opacity: 0;
+            }
+
+            li:nth-child(3) {
+                // 向上旋转
+                transform: rotateZ(-38deg);
+            }
+        }
+    }
+}
+
+// 设置媒体查询
+@media only screen {
+    // 断点768px
+    @media (min-width: 768px) {
+        .left-menu {
+            order: 2;
+            flex: auto;
+            // 显示菜单
+            .nav {
+                position: static;
+                display: flex;
+                padding: 0;
+                justify-content: space-around;
+
+                li {
+                    width: auto;
+                    border-bottom: none;
+                    margin: 0;
+
+                    a {
+                        line-height: 40px;
+                    }
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
+            // 隐藏菜单图标
+            .menu-icon {
+                display: none;
+            }
+        }
+        .logo {
+            order: 1;
+        }
+        .user-info {
+            order: 3;
+        }
+    }
+}
